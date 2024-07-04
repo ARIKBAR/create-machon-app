@@ -46,12 +46,19 @@ const StudentList = () => {
   const handleDeleteAll = async () => {
     if (window.confirm('האם אתה בטוח שברצונך למחוק את כל התלמידים? פעולה זו בלתי הפיכה!')) {
       try {
-        await axios.delete('http://localhost:5000/api/students/all');
+        const response = await fetch('http://localhost:5000/api/students/deleteAll', {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Server response:', data);
         setStudents([]);
         alert('כל התלמידים נמחקו בהצלחה');
       } catch (error) {
         console.error('שגיאה במחיקת כל התלמידים:', error);
-        alert('אירעה שגיאה במחיקת התלמידים');
+        alert(`אירעה שגיאה במחיקת התלמידים: ${error.message}`);
       }
     }
   };

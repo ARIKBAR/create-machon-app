@@ -51,7 +51,7 @@ function StudentDetails() {
         <p><strong>טלפון:</strong> {student.telphon}</p>
         <p><strong>שם האב:</strong> {student.nameAv}</p>
         <p><strong>מייל:</strong> {student.email}</p>
-        <p><strong>כיתה:</strong> {student.classes}</p>
+        <p><strong>כיתה:</strong> {student.class}</p>
         <p><strong>מצב משפחתי:</strong> {student.statusp}</p>
         <p><strong>הסדר תשלום:</strong> {student.paymentesder}</p>
         <p><strong>שיטת תשלום:</strong> {student.paymentMethod}</p>

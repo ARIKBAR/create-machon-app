@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import './AddStudent.css';
 
 const AddStudent = () => {
   const [student, setStudent] = useState({
     created: '',
+    class:'',
     shlucha: '',
     maslul: '',
     namePrati: '',
@@ -18,7 +19,6 @@ const AddStudent = () => {
     nameAv: '',
     telphon: '',
     email: '',
-    classes: '',
     statusp:'',
     paymentesder:'',
     paymentMethod: '',
@@ -29,6 +29,20 @@ const AddStudent = () => {
 
   });
 
+  const [classes, setClasses] = useState([]);
+
+useEffect(() => {
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get('https://servermachon.onrender.com/api/classes');
+      setClasses(response.data);
+    } catch (error) {
+      console.error('Error fetching classes:', error);
+    }
+  };
+  fetchClasses();
+}, []);
+
   const handleChange = (e) => {
     setStudent({ ...student, [e.target.name]: e.target.value });
   };
@@ -36,7 +50,11 @@ const AddStudent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://servermachon.onrender.com/api/students', student);
+      const studentData = { ...student };
+      if (studentData.class === '') {
+        delete studentData.class; // מחק את השדה אם לא נבחרה כיתה
+      }
+      const res = await axios.post('https://servermachon.onrender.com/api/students', studentData);
       console.log('תלמיד נשמר בהצלחה:', res.data);
       // כאן תוכל להוסיף לוגיקה נוספת, כמו ניקוי הטופס או הודעה למשתמש
     } catch (err) {
@@ -69,6 +87,20 @@ const AddStudent = () => {
           />
           <label>שלוחה</label>
         </div>
+        <div className="form-group">
+  <select
+    name="class"
+    value={student.class}
+    onChange={handleChange}
+    required
+  >
+    <option value="">בחר כיתה</option>
+    {classes.map((cls) => (
+      <option key={cls._id} value={cls._id}>{cls.name}</option>
+    ))}
+  </select>
+  <label>כיתה</label>
+</div>
         <div className="form-group">
         <select
             name="maslul"
