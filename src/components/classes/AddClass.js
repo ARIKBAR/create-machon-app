@@ -24,16 +24,16 @@ function AddClass() {
     <form className="form-container" onSubmit={handleSubmit}>
       <h2>יצירת כיתה חדשה</h2>
       <div className="form-group">
-        <label>שם הכיתה:</label>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <label>שנת לימודים:</label>
       </div>
       <div className="form-group">
-        <label>עיר:</label>
         <input type="text" value={grade} onChange={(e) => setGrade(e.target.value)} required />
+        <label>עיר:</label>
       </div>
       <div className="form-group">
-        <label>מרצה:</label>
         <input type="text" value={teacher} onChange={(e) => setTeacher(e.target.value)} required />
+        <label>מרצה:</label>
       </div>
       <button className="submit-btn" type="submit">צור כיתה</button>
     </form>

@@ -1,0 +1,75 @@
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .stat-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 5px;
+    height: 100px;
+  }
+  
+  .stat-card h3 {
+    margin-top: 0;
+    color: #C7884C;
+  }
+  
+  .stat-card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #346458;
+    margin-bottom: 0;
+  }
+  
+  .quick-links {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .quick-links h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .quick-links button {
+    background-color: #C7884C;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .quick-links button:hover {
+    background-color: #303f9f;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
+  }
+  
+  .error {
+    color: red;
+  }
+  .h1{
+    color: #346458;
+  }

@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddStudent.css';
 
 const AddStudent = () => {
   const [student, setStudent] = useState({
     created: '',
-    class:'',
+    class: '',
     shlucha: '',
     maslul: '',
     namePrati: '',
@@ -19,8 +19,8 @@ const AddStudent = () => {
     nameAv: '',
     telphon: '',
     email: '',
-    statusp:'',
-    paymentesder:'',
+    statusp: '',
+    paymentesder: '',
     paymentMethod: '',
     creditCardNumber: '',
     creditCardExpiry: '',
@@ -30,18 +30,19 @@ const AddStudent = () => {
   });
 
   const [classes, setClasses] = useState([]);
+  
 
-useEffect(() => {
-  const fetchClasses = async () => {
-    try {
-      const response = await axios.get('https://servermachon.onrender.com/api/classes');
-      setClasses(response.data);
-    } catch (error) {
-      console.error('Error fetching classes:', error);
-    }
-  };
-  fetchClasses();
-}, []);
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const response = await axios.get('https://servermachon.onrender.com/api/classes');
+        setClasses(response.data);
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+      }
+    };
+    fetchClasses();
+  }, []);
 
   const handleChange = (e) => {
     setStudent({ ...student, [e.target.name]: e.target.value });
@@ -88,21 +89,21 @@ useEffect(() => {
           <label>שלוחה</label>
         </div>
         <div className="form-group">
-  <select
-    name="class"
-    value={student.class}
-    onChange={handleChange}
-    required
-  >
-    <option value="">בחר כיתה</option>
-    {classes.map((cls) => (
-      <option key={cls._id} value={cls._id}>{cls.name}</option>
-    ))}
-  </select>
-  <label>כיתה</label>
-</div>
+          <select
+            name="class"
+            value={student.class}
+            onChange={handleChange}
+            required
+          >
+            <option value="">בחר כיתה</option>
+            {classes.map((cls) => (
+              <option key={cls._id} value={cls._id}>{cls.name}</option>
+            ))}
+          </select>
+          <label>כיתה</label>
+        </div>
         <div className="form-group">
-        <select
+          <select
             name="maslul"
             value={student.maslul}
             onChange={handleChange}
@@ -116,7 +117,7 @@ useEffect(() => {
             <option name='maslul' value="הרחבת הסמכה"> הרחבת הסמכה</option>
           </select>
           <label>מסלול</label>
-          </div>
+        </div>
         <div className="form-group">
           <input
             type="text"
@@ -223,17 +224,17 @@ useEffect(() => {
           <label>טלפון בבית</label>
         </div>
         <div className="form-group">
-        <select
+          <select
             name="statusp"
             value={student.statusp}
             onChange={handleChange}
           >
-           <option value="">מצב משפחתי</option>
-            <option  value="נשוי"> נשוי</option>
-            <option  value="רווק">רווק</option>
-            <option  value="אלמן">אלמן</option>
-            <option  value="גרוש">גרוש</option>
-        
+            <option value="">מצב משפחתי</option>
+            <option value="נשוי"> נשוי</option>
+            <option value="רווק">רווק</option>
+            <option value="אלמן">אלמן</option>
+            <option value="גרוש">גרוש</option>
+
           </select>
           <label>מצב משפחתי</label>
         </div>

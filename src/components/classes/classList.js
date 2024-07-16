@@ -10,6 +10,8 @@ const ClassList = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [selectedClass, setSelectedClass] = useState(null);
+  // const [count, setCount] = useState([]);
+
 
 
   const navigate = useNavigate();
@@ -17,7 +19,9 @@ const ClassList = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('https://servermachon.onrender.com/api/classes?populate=students');
+        // const response = await axios.get('https://servermachon.onrender.com/api/classes?populate=students');
+        const response = await axios.get('https://servermachon.onrender.com/api/classes');
+
         setClasses(response.data);
         setLoading(false);
       } catch (err) {
@@ -29,13 +33,29 @@ const ClassList = () => {
     fetchClasses();
   }, []);
 
+  
+    // const fetchCount = async (id) => {
+    //   try {
+    //     // const response = await axios.get('https://servermachon.onrender.com/api/classes?populate=students');
+    //     const response = await axios.get(`http://localhost:5000/api/classes/count/${id}`);
+
+    //     setCount(response.data);
+    //     setLoading(false);
+    //   } catch (err) {
+    //     setError('אירעה שגיאה בטעינת הנתונים');
+    //     setLoading(false);
+    //   }
+    // };
+    // console.log(count);
+
+
   if (loading) return <div className="loading">טוען נתונים...</div>;
   if (error) return <div className="error">{error}</div>;
 
   const handleDelete = async (id) => {
     if (window.confirm('האם אתה בטוח שברצונך למחוק כיתה זו?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/classes/${id}`);
+        await axios.delete(`https://servermachon.onrender.com/api/classes/${id}`);
         setClasses(classes.filter(classItem => classItem._id !== id));
       } catch (error) {
         console.error('שגיאה במחיקת הכיתה:', error);
@@ -46,7 +66,7 @@ const ClassList = () => {
   const handleDeleteAll = async () => {
     if (window.confirm('האם אתה בטוח שברצונך למחוק את כל הכיתות? פעולה זו בלתי הפיכה!')) {
       try {
-        await axios.delete('http://localhost:5000/api/classes/deleteAll');
+        await axios.delete('https://servermachon.onrender.com/api/classes/deleteAll');
         setClasses([]);
         alert('כל הכיתות נמחקו בהצלחה');
       } catch (error) {
@@ -57,9 +77,9 @@ const ClassList = () => {
   };
 
   const filteredClasses = classes.filter(item => 
-    item.name.includes(search) || 
-    item.teacher.includes(search) ||
-    item.students.some(student => 
+    item.name?.includes(search) || 
+    item.teacher?.includes(search) ||
+    item.students?.some(student => 
       `${student.namePrati} ${student.nameMishpacha}`.includes(search)
     )
   );
@@ -79,11 +99,11 @@ const ClassList = () => {
       <table>
       <thead>
   <tr>
-    <th>שם הכיתה</th>
-    <th>שכבה</th>
+    <th>שנת לימודים</th>
+    <th>עיר</th>
     <th>מחנך/ת</th>
     <th>מספר תלמידים</th>
-    <th>תלמידים</th>
+    {/* <th>תלמידים</th> */}
     <th>פעולות</th>
   </tr>
 </thead>
@@ -93,21 +113,20 @@ const ClassList = () => {
       <td>{classItem.name}</td>
       <td>{classItem.grade}</td>
       <td>{classItem.teacher}</td>
-      <td>{classItem.students ? classItem.students.length : 0}</td>
-    <td>
-      {classItem.students && classItem.students.map(student => 
+      <td>{classItem.countStudents} </td>
+      <td>{classItem ?classItem.length : 0}</td>
+    {/* <td>
+      {classItem && classItem.map(student => 
         `${student.namePrati} ${student.nameMishpacha}`
       ).join(', ')}
-    </td>
+    </td> */}
       <td>
-        <button className="action-btn view" onClick={() => navigate(`/class/${classItem._id}`)}>צפייה</button>
-        <button className="action-btn edit" onClick={() => navigate(`/edit-class/${classItem._id}`)}>עריכה</button>
+        <button className="action-btn view"  onClick={() => navigate(`/classes/${classItem._id}`)}>צפייה</button>
+
+        {/* <button className="action-btn edit" onClick={() => navigate(`/edit-class/${classItem._id}`)}>עריכה</button> */}
         <button className="action-btn delete" onClick={() => handleDelete(classItem._id)}>מחיקה</button>
       </td>
       <td>
-  <button onClick={() => setSelectedClass(classItem)}>
-    צפייה בתלמידים ({classItem.students.length})
-  </button>
 </td>
     </tr>
   ))}

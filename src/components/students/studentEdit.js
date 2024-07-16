@@ -10,6 +10,7 @@ const StudentEdit = () => {
     created: '',
     shlucha: '',
     maslul: '',
+    class:'',
     namePrati: '',
     nameMishpacha: '',
     id: '',
@@ -31,6 +32,21 @@ const StudentEdit = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [classes, setClasses] = useState([]);
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const response = await axios.get('https://servermachon.onrender.com/api/classes');
+        setClasses(response.data);
+        console.log(response.data);
+        
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+      }
+    };
+    fetchClasses();
+  }, []);
+
 
   useEffect(() => {
     const fetchStudent = async () => {
@@ -77,7 +93,7 @@ const StudentEdit = () => {
             name="created"
             value={student.created}
             onChange={handleChange}
-            
+
           />
           <label>תאריך רישום</label>
         </div>
@@ -87,7 +103,7 @@ const StudentEdit = () => {
             name="shlucha"
             value={student.shlucha}
             onChange={handleChange}
-            
+
           />
           <label>שלוחה</label>
         </div>
@@ -113,7 +129,7 @@ const StudentEdit = () => {
             name="namePrati"
             value={student.namePrati}
             onChange={handleChange}
-            
+
           />
           <label>שם פרטי</label>
         </div>
@@ -123,7 +139,7 @@ const StudentEdit = () => {
             name="nameMishpacha"
             value={student.nameMishpacha}
             onChange={handleChange}
-            
+
           />
           <label>שם משפחה</label>
         </div>
@@ -133,7 +149,7 @@ const StudentEdit = () => {
             name="id"
             value={student.id}
             onChange={handleChange}
-            
+
           />
           <label>מספר זהות</label>
         </div>
@@ -143,7 +159,7 @@ const StudentEdit = () => {
             name="tl"
             value={student.tl}
             onChange={handleChange}
-            
+
           />
           <label>תאריך לידה</label>
         </div>
@@ -153,7 +169,7 @@ const StudentEdit = () => {
             name="tlhw"
             value={student.tlhw}
             onChange={handleChange}
-            
+
           />
           <label>תאריך לידה עברי</label>
         </div>
@@ -166,6 +182,20 @@ const StudentEdit = () => {
           />
           <label>כתובת</label>
         </div>
+          <div className="form-group">
+            <select
+              name="class"
+              value={student.class}
+              onChange={handleChange}
+              required
+            >
+              <option value="">בחר כיתה</option>
+              {classes.map((cls) => (
+                <option key={cls._id} value={cls._id}>{cls.name}</option>
+              ))}
+            </select>
+            <label>כיתה</label>
+          </div>
         <div className="form-group">
           <input
             type="text"

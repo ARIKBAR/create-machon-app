@@ -46,7 +46,7 @@ const StudentList = () => {
   const handleDeleteAll = async () => {
     if (window.confirm('האם אתה בטוח שברצונך למחוק את כל התלמידים? פעולה זו בלתי הפיכה!')) {
       try {
-        const response = await fetch('http://localhost:5000/api/students/deleteAll', {
+        const response = await fetch('https://servermachon.onrender.com/api/students/deleteAll', {
           method: 'DELETE',
         });
         if (!response.ok) {
@@ -63,10 +63,11 @@ const StudentList = () => {
     }
   };
 
-  const filterStudent=students.filter(item=>item.namePrati.includes(search)||item.nameMishpacha.includes(search))
+  const filterStudent=students.filter(item=>item.namePrati?.includes(search)||item.nameMishpacha?.includes(search))
   return (
     
     <div className="student-list">
+      <p className='p'>מכון למורים</p>
       <button onClick={handleDeleteAll} className="delete-all-btn">
         <FaTrash /> מחק את כל התלמידים
       </button>

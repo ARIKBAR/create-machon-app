@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { FaList, FaUserPlus } from 'react-icons/fa';
-import { FaFileUpload } from 'react-icons/fa';
-import { FaChalkboardTeacher } from 'react-icons/fa';
-
+import { FaList, FaUserPlus,FaChalkboardTeacher,FaFileUpload,FaHome  } from 'react-icons/fa';
 
 import styles from './Layout.module.css';
-
 const Layout = () => {
   return (
     <div className={styles.container}>
       <nav className={styles.sidebar}>
         <ul className={styles.navList}>
-          <li className={styles.navItem}>
+        <li className={styles.navItem}>
             <Link to="/" className={styles.navLink}>
+              <FaHome  className={styles.icon} />
+              <span> דשבורד</span>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link to="/a" className={styles.navLink}>
               <FaList className={styles.icon} />
               <span>רשימת תלמידים</span>
             </Link>
@@ -22,6 +24,12 @@ const Layout = () => {
             <Link to="/Addstudent" className={styles.navLink}>
               <FaUserPlus className={styles.icon} />
               <span>הוספת תלמידים</span>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link to="/AddTeacher" className={styles.navLink}>
+              <FaUserPlus className={styles.icon} />
+              <span>הוספת מורה</span>
             </Link>
           </li>
           <li className={styles.navItem}>

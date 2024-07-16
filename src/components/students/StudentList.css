@@ -4,6 +4,11 @@
     margin: 0 auto;
     padding: 20px;
   }
+  .p{
+    font-size: xx-large;
+    color: #346458;
+    font-weight:bold
+  }
   
   h2 {
     text-align: center;
@@ -45,12 +50,12 @@
   }
   
   .view {
-    background-color: #4285f4;
+    background-color: #346458;
     color: white;
   }
   
   .edit {
-    background-color: #fbbc05;
+    background-color: #C7884C;
     color: black;
   }
   
